@@ -1,1 +1,1 @@
-web: gunicorn app_cowin:app
+web: gunicorn wsgi:app
