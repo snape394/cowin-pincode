@@ -1,3 +1,5 @@
+import time
+
 from flask import Flask
 from geopy.geocoders import Nominatim
 import pandas as pd
@@ -22,11 +24,15 @@ def start():
         df = pd.read_csv('pincode_details.csv')
         for index, row in df.iterrows():
             city = str(row['pincode'])
-            geolocator = Nominatim(user_agent="http")
-            location = geolocator.geocode(city)
-            if location:
-                df.loc[index, 'latitude'], df.loc[index, 'longitude'] = location.latitude, location.longitude
-                print(row['officename'], ' : ', (location.latitude, location.longitude))
+            if row['circlename'] == "Uttar Pradesh":
+                geolocator = Nominatim(user_agent="http")
+                location = geolocator.geocode(city)
+                if location:
+                    df.loc[index, 'latitude'], df.loc[index, 'longitude'] = location.latitude, location.longitude
+                    print(row['officename'], ' : ', (location.latitude, location.longitude))
+            time.sleep(1.0)
+
+
 
         df.to_csv("all-details.csv", index=False)
 
