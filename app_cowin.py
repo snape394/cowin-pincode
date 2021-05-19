@@ -29,7 +29,7 @@ def start():
             if location:
                 df.loc[index, 'latitude'], df.loc[index, 'longitude'] = location.latitude, location.longitude
                 print(row['officename'], ' : ', (location.latitude, location.longitude))
-        time.sleep(1.0)
+            time.sleep(1.0)
         df.to_csv("all-details.csv", index=False)
 
     return 'Completed'
